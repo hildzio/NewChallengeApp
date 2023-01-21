@@ -1,27 +1,35 @@
-﻿Console.WriteLine("Podaj liczbę do analizy: ");
-string digitInString = Console.ReadLine();
-char[] digitsFromInput = digitInString.ToArray();
-List<string> digitsFromZeroToNine = new();
-List<int> occurDigits = new();
-int digit = 0;
+﻿using System.Runtime.CompilerServices;
 
-for (int n = 0; n <= 9; n++)
-{
-    string nString = digit.ToString();
-    digitsFromZeroToNine.Add(nString);
-    digit++;
-}
-Console.WriteLine($"Wyniki dla liczby : {digitInString}");
+User user1 = new("Adam", "sa12345dwf");
+User user2 = new("Monika", "sa12345dwf");
+User user3 = new("Zuzia", "sa12345dwf");
+User user4 = new("Damian", "sa12345dwf");
 
-for (var j = 0; j < digitsFromZeroToNine.Count; j++)
+user1.AddScore(5);
+user1.AddScore(32);
+var result = user1.Result;
+Console.WriteLine(result);
+
+class User
 {
-    var countOccurDigits = 0;
-    for (var i = 0; i < digitsFromInput.Length; i++)
+    private List<int> score = new List<int>();
+    public string Login { get; private set; }
+    public string Password { get; private set; }
+    public int Result
     {
-        if (digitsFromInput[i].ToString() == digitsFromZeroToNine[j])
+        get
         {
-            countOccurDigits++;
+            return this.score.Sum();
         }
     }
-    Console.WriteLine($"{digitsFromZeroToNine[j]} => {countOccurDigits}");
+    public User(string login, string password)
+    {
+        this.Login = login;
+        this.Password = password;
+    }
+
+    public void AddScore(int number)
+    {
+        this.score.Add(number);
+    }
 }
