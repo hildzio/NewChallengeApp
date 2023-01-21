@@ -1,24 +1,23 @@
-﻿string name = "Ewa";
-char sex = 'F';
-int age = 30;
+﻿int[] grades = new int[365];
+List<string> daysOfWeeks = new List<string>();
+daysOfWeeks.Add("Poniedziałek");
+daysOfWeeks.Add("Wtorek");
+daysOfWeeks.Add("Środa");
+daysOfWeeks.Add("Czwartek");
+daysOfWeeks.Add("Piątek");
+daysOfWeeks.Add("Sobota");
+daysOfWeeks.Add("Niedziela");
+Console.WriteLine(daysOfWeeks[0]);
 
-if (sex == 'F' && age < 30)
+string[] dayOfWeeks2 = { "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela" };
+Console.WriteLine(daysOfWeeks[4]);
+
+for (var i = 0; i < daysOfWeeks.Count; i++)
 {
-    Console.WriteLine("Kobieta poniżej 30 lat");
+    Console.Write($"{daysOfWeeks[i]}, ");
 }
-else if (name == "Ewa" && age == 33)
+foreach(var day in daysOfWeeks)
 {
-    Console.WriteLine("Ewa, lat 33");
+    Console.WriteLine(day);
 }
-else if (age < 18 && sex == 'M')
-{
-    Console.WriteLine("Niepełnoletni Mężczyzna");
-}
-else if (sex == 'M')
-{
-    Console.WriteLine($"Naszym bohaterem jest mężczyzna {name} w wieku {age} lat.");
-}
-else
-{
-    Console.WriteLine($"Naszą bohaterką jest kobieta {name} w wieku {age} lat.");
-}
+
