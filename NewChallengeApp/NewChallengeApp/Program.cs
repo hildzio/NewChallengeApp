@@ -7,9 +7,23 @@ Employee user1 = new("Adam", "Kowalski", 33);
 Employee user2 = new("Monika", "Nowak", 23);
 Employee user3 = new("Zuzia", "Pawlak", 45);
 
-user1.Add5Grades(5, 1, 3, 8, 9);
-user2.Add5Grades(2, 3, 4, 6, 7);
-user3.Add5Grades(5, 2, 6, 1, 8);
+user1.AddGrade(5);
+user1.AddGrade(1);
+user1.AddGrade(3);
+user1.AddGrade(8);
+user1.AddGrade(9);
+
+user2.AddGrade(2);
+user2.AddGrade(4);
+user2.AddGrade(6);
+user2.AddGrade(7);
+user2.AddGrade(9);
+
+user3.AddGrade(5);
+user3.AddGrade(2);
+user3.AddGrade(6);
+user3.AddGrade(1);
+user3.AddGrade(8);
 
 var result1 = user1.ResultSum;
 var result2 = user2.ResultSum;
