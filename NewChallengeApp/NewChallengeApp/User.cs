@@ -18,7 +18,6 @@
             this.Login = login;
             this.Password = password;
         }
-
         public void AddScore(int number)
         {
             this.score.Add(number);
