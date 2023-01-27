@@ -24,6 +24,7 @@ user3.AddGrade(2);
 user3.AddGrade(6);
 user3.AddGrade(1);
 user3.AddGrade(8);
+//user3.SubstractGrade(3);
 
 var result1 = user1.ResultSum;
 var result2 = user2.ResultSum;
@@ -32,6 +33,7 @@ var result3 = user3.ResultSum;
 resultList.Add(result1);
 resultList.Add(result2);
 resultList.Add(result3);
+//Console.WriteLine($"ResultSum3 : {result3}");
 
 int maxResult = resultList.Max();
 

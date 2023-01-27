@@ -1,4 +1,6 @@
-﻿namespace NewChallengeApp
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace NewChallengeApp
 {
     public class User
     {
@@ -12,6 +14,7 @@
             {
                 return this.score.Sum();
             }
+            set { }
         }
         public User(string login, string password)
         {
@@ -22,9 +25,9 @@
         {
             this.score.Add(number);
         }
-        public void RemoveScore(int number)
+        public void AddNegativeScore(int number)
         {
-            this.score.Remove(number);
+            this.score.Add(-1 * number);
         }
     }
 }

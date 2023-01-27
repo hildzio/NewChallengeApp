@@ -30,16 +30,18 @@ namespace NewChallengeApp.Tests
             //assert
             Assert.AreEqual(0, result);
         }
-
         [Test]
-        public void WhenUserCollectMinusFromMethod_ShouldReturnZero()
+        public void WhenUserCollectMinusFromResult_ShouldReturnZero()
         {
             //arrange
             var user = new User("Krzysztof", "haslo123");
             user.AddScore(5);
             user.AddScore(6);
-            user.RemoveScore(6);
-            user.RemoveScore(5);
+            user.AddNegativeScore(11);
+            user.AddScore(8);
+            user.AddScore(2);
+            user.AddNegativeScore(4);
+            user.AddNegativeScore(6);
             //act
             int result = user.Result;
             //assert

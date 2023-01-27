@@ -13,6 +13,7 @@
             {
                 return this.grades.Sum();
             }
+            set { }
         }
         public Employee(string name, string surname, int age)
         {
