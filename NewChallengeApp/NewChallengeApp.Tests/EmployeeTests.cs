@@ -3,19 +3,7 @@
     public class EmployeeTests
     {
         [Test]
-        public void AverageFromEmployeeGrades_ShouldReturnCorrectResult()
-        {
-            //arrange
-            var employee = new Employee("Adam", "haslo123",28);
-            employee.AddGrade(5);
-            employee.AddGrade(6);
-            //act
-            var statistics = employee.GetStatistics();
-            //assert
-            Assert.AreEqual(5.5, statistics.Average);
-        }
-        [Test]
-        public void CheckMinAndMaxMethod_ShouldReturnCorrectResult()
+        public void CheckMinMaxAverageMethod_ShouldReturnCorrectResult()
         {
             //arrange
             var employee = new Employee("Jan", "haslo123", 35);
@@ -29,6 +17,7 @@
             //assert
             Assert.AreEqual(1, statistics.Min);
             Assert.AreEqual(21, statistics.Max);
+            Assert.AreEqual(10.6f, statistics.Average);
         }
     }
 }
