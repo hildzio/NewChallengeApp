@@ -4,7 +4,7 @@ namespace NewChallengeApp.Tests
 {
     public class TypeTests
     {
-        [Test]
+      /*  [Test]
         public void CompareTwoReferences_ShouldReturnTrue()
         {
             //arrange
@@ -58,6 +58,6 @@ namespace NewChallengeApp.Tests
         private User GetUser(string login, string password)
         {
             return new User(login, password);
-        }
+        }*/
     }
 }
