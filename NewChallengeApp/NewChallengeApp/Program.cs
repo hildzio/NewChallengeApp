@@ -29,8 +29,27 @@ void AddSeriesOfGrades()
 void PrintStatistics()
 {
     Console.WriteLine($"Dla pracownika {name} {surname}, lat {age} są dostępne poniższe dane:");
-    var statistics = employee1.GetStatistics();
-    Console.WriteLine($"Average: {statistics.Average:N2}");
-    Console.WriteLine($"Max: {statistics.Max}");
-    Console.WriteLine($"Min: {statistics.Min}");
+    var statistics = employee1.GetStatisticsWithForeach();
+    Console.WriteLine($"Dla pętli foreach :\n" +
+                      $"Average: {statistics.Average:N2}\n" +
+                      $"Max: {statistics.Max}\n" +
+                      $"Min: {statistics.Min} \n");
+
+    var statistics1 = employee1.GetStatisticsWithFor();
+    Console.WriteLine($"Dla pętli for :\n" +
+                      $"Average: {statistics1.Average:N2}\n" +
+                      $"Max: {statistics1.Max} \n" +
+                      $"Min: {statistics1.Min} \n");
+
+    var statistics2 = employee1.GetStatisticsWithDoWhile();
+    Console.WriteLine($"Dla pętli do while :\n" +
+                      $"Average: {statistics2.Average:N2} \n" +
+                      $"Max: {statistics2.Max} \n" +
+                      $"Min: {statistics2.Min} \n");
+
+    var statistics3 = employee1.GetStatisticsWithWhile();
+    Console.WriteLine($"Dla pętli do while :\n" +
+                      $"Average: {statistics3.Average:N2} \n" +
+                      $"Max: {statistics3.Max}\n" +
+                      $"Min: {statistics3.Min} \n");
 }
