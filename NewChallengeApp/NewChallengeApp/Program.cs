@@ -5,10 +5,19 @@ using System.Xml.Linq;
 var employeeInputName = EnterEmployeeName();
 var employeeInputSurname = EnterEmployeeSurname();
 var employeeInputAge = EnterEmployeeAge();
-
 Employee employee1 = new(employeeInputName, employeeInputSurname, employeeInputAge);
-AddGradesToEmpoloyee(employee1);
-PrintStatistics(employee1);
+try
+{
+    AddGradesToEmpoloyee(employee1);
+}
+catch (Exception e)
+{
+    Console.WriteLine($"Exception catched {e.Message}");
+}
+finally
+{
+    PrintStatistics(employee1);
+}
 static string EnterEmployeeName()
 {
     bool whileStatus = false;

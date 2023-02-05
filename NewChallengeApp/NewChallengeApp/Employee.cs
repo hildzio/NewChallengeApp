@@ -24,7 +24,7 @@ namespace NewChallengeApp
             }
             else
             {
-                Console.WriteLine("Invalid grade. Type value between 0 and 100.");
+                throw new Exception("Invalid grade. Type value between 0 and 100.");
             }
         }
         public void AddGrade(string gradeInString)
@@ -35,7 +35,7 @@ namespace NewChallengeApp
             }
             else
             {
-                Console.WriteLine("String is not float.");
+               throw new Exception("String is not float.");
             }
         }
         public void AddGrade(int gradeInInt)
@@ -68,7 +68,7 @@ namespace NewChallengeApp
                     this.grades.Add(20);
                     break;
                 default:
-                    Console.WriteLine("Wrong Letter");
+                    throw new Exception("Wrong Letter");
                     break;
             }
         }
