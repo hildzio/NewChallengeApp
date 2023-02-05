@@ -1,55 +1,103 @@
 ﻿using NewChallengeApp;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
-string name;
-string surname;
-int age;
+var employeeInputName = EnterEmployeeName();
+var employeeInputSurname = EnterEmployeeSurname();
+var employeeInputAge = EnterEmployeeAge();
 
-EnterEmployeeData();
-Employee employee1 = new(name, surname, age);
-AddSeriesOfGrades();
-PrintStatistics();
-
-void EnterEmployeeData()
+Employee employee1 = new(employeeInputName, employeeInputSurname, employeeInputAge);
+AddGradesToEmpoloyee(employee1);
+PrintStatistics(employee1);
+static string EnterEmployeeName()
 {
-    Console.WriteLine("Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
-    name = Console.ReadLine();
-    Console.WriteLine("Teraz podaj nazwisko pracownika: ");
-    surname = Console.ReadLine();
-    Console.WriteLine("Teraz podaj wiek pracownika: ");
-    age = int.Parse(Console.ReadLine());
+    bool whileStatus = false;
+    string name = null;
+    while (!whileStatus)
+    {
+        var inputName = GetValueFromConsole("Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
+        if (!string.IsNullOrEmpty(inputName))
+        {
+            name = inputName;
+            whileStatus = true;
+        }
+        else
+        {
+            MsgValueCantBeNull();
+        }
+    }
+    return name;
 }
-void AddSeriesOfGrades()
+static string EnterEmployeeSurname()
 {
-    employee1.AddGrade(5);
-    employee1.AddGrade(1);
-    employee1.AddGrade(3);
-    employee1.AddGrade(8);
-    employee1.AddGrade(9);
+    bool whileStatus = false;
+    string surname = null;
+    while (!whileStatus)
+    {
+        var inputSurname = GetValueFromConsole("Teraz podaj nazwisko pracownika: ");
+        if (!string.IsNullOrEmpty(inputSurname))
+        {
+            surname = inputSurname;
+            whileStatus = true;
+        }
+        else
+        {
+            MsgValueCantBeNull();
+        }
+    }
+    return surname;
 }
-void PrintStatistics()
+static int EnterEmployeeAge()
 {
-    Console.WriteLine($"Dla pracownika {name} {surname}, lat {age} są dostępne poniższe dane:");
-    var statistics = employee1.GetStatisticsWithForeach();
-    Console.WriteLine($"Dla pętli foreach :\n" +
-                      $"Average: {statistics.Average:N2}\n" +
+    bool whileStatus = false;
+    int age = 0;
+    while (!whileStatus)
+    {
+        var inputAge = GetValueFromConsole("Teraz podaj wiek pracownika: ");
+        var succes = int.TryParse(inputAge, out int parsedAge);
+
+        if (succes == true && parsedAge > 0)
+        {
+            age = parsedAge;
+            whileStatus = true;
+        }
+        else
+        {
+            MsgValueCantBeNull();
+            Console.WriteLine("Wprowadź poprawną wartość wieku w latach.");
+        }
+    }
+    return age;
+}
+static void MsgValueCantBeNull()
+{
+    Console.WriteLine("Warotość nie może być NULL.");
+}
+static string GetValueFromConsole(string inputMessage)
+{
+    Console.WriteLine(inputMessage);
+    var inputFromUser = Console.ReadLine();
+    return inputFromUser;
+}
+void AddGradesToEmpoloyee(Employee employee)
+{
+    while (true)
+    {
+        Console.WriteLine($"Podaj kolejną ocenę dla pracowanika {employee.Name} {employee.Surname} lub wciśnij q aby wyjść : ");
+        var input = Console.ReadLine();
+        if (input == "q")
+        {
+            break;
+        }
+        employee.AddGrade(input!);
+    }
+}
+void PrintStatistics(Employee employee)
+{
+    Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge} są dostępne poniższe dane:");
+    var statistics = employee.GetStatistics();
+    Console.WriteLine($"Average: {statistics.Average:N2}\n" +
                       $"Max: {statistics.Max}\n" +
-                      $"Min: {statistics.Min} \n");
-
-    var statistics1 = employee1.GetStatisticsWithFor();
-    Console.WriteLine($"Dla pętli for :\n" +
-                      $"Average: {statistics1.Average:N2}\n" +
-                      $"Max: {statistics1.Max} \n" +
-                      $"Min: {statistics1.Min} \n");
-
-    var statistics2 = employee1.GetStatisticsWithDoWhile();
-    Console.WriteLine($"Dla pętli do while :\n" +
-                      $"Average: {statistics2.Average:N2} \n" +
-                      $"Max: {statistics2.Max} \n" +
-                      $"Min: {statistics2.Min} \n");
-
-    var statistics3 = employee1.GetStatisticsWithWhile();
-    Console.WriteLine($"Dla pętli do while :\n" +
-                      $"Average: {statistics3.Average:N2} \n" +
-                      $"Max: {statistics3.Max}\n" +
-                      $"Min: {statistics3.Min} \n");
+                      $"Min: {statistics.Min} \n" +
+                      $"Letter: {statistics.AverageLetter} \n");
 }
