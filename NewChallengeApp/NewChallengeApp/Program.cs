@@ -72,7 +72,15 @@ void AddGradesToEmpoloyee(Employee employee)
         }
         try
         {
-            employee.AddGrade(input!);
+            if (input == "A" || input == "a" || input == "B" || input == "b" || input == "C" || input == "c" || input == "D" || input == "d" || input == "E" || input == "e")
+            {
+                var inputChar = char.Parse(input);
+                employee.AddGrade(inputChar);
+            }
+            else
+            {
+                employee.AddGrade(input!);
+            }
         }
         catch (Exception e)
         {
@@ -84,7 +92,8 @@ void PrintStatistics(Employee employee)
 {
     Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge} są dostępne poniższe dane:");
     var statistics = employee.GetStatistics();
-    Console.WriteLine($"Average: {statistics.Average:N2}\n" +
+    Console.WriteLine($"Grades list: {statistics.GradesList}\n" +
+                      $"Average: {statistics.Average:N2}\n" +
                       $"Max: {statistics.Max}\n" +
                       $"Min: {statistics.Min} \n" +
                       $"Letter: {statistics.AverageLetter} \n");
