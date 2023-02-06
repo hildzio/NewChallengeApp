@@ -91,8 +91,8 @@ void AddGradesToEmpoloyee(Employee employee)
 void PrintStatistics(Employee employee)
 {
     Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge} są dostępne poniższe dane:");
-    var statistics = employee.GetStatistics();
-    Console.WriteLine($"Grades list: {statistics.GradesList}\n" +
+    var statistics = employee.GetStatistics();   
+    Console.WriteLine($"Grades list: {statistics.GradesList.TrimStart(',')}\n" +
                       $"Average: {statistics.Average:N2}\n" +
                       $"Max: {statistics.Max}\n" +
                       $"Min: {statistics.Min} \n" +

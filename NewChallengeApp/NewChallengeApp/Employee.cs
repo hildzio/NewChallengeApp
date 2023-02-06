@@ -87,7 +87,7 @@ namespace NewChallengeApp
                 statistics.Max = Math.Max(statistics.Max, grade);
                 statistics.Min = Math.Min(statistics.Min, grade);
                 statistics.Average += grade;
-                statistics.GradesList += $"{grade}, ";
+                statistics.GradesList += $", {grade}";
             }
             statistics.Average = statistics.Average / this.grades.Count;
 
