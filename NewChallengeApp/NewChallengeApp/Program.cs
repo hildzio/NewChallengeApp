@@ -2,13 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-var employeeInputName = EnterEmployeeName();
-var employeeInputSurname = EnterEmployeeSurname();
+var employeeInputName = EnterEmployeeData("name", "Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
+var employeeInputSurname = EnterEmployeeData("surname", "Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
 var employeeInputAge = EnterEmployeeAge();
-Employee employee1 = new(employeeInputName, employeeInputSurname, employeeInputAge);
+Employee employee = new(employeeInputName, employeeInputSurname, employeeInputAge);
 try
 {
-    AddGradesToEmpoloyee(employee1);
+    AddGradesToEmpoloyee(employee);
 }
 catch (Exception e)
 {
@@ -16,18 +16,19 @@ catch (Exception e)
 }
 finally
 {
-    PrintStatistics(employee1);
+    PrintStatistics(employee);
 }
-static string EnterEmployeeName()
+
+static string EnterEmployeeData(string input, string message)
 {
     bool whileStatus = false;
-    string name = null;
+    input = null;
     while (!whileStatus)
     {
-        var inputName = GetValueFromConsole("Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
-        if (!string.IsNullOrEmpty(inputName))
+        var inputValue = GetValueFromConsole(message);
+        if (!string.IsNullOrEmpty(inputValue))
         {
-            name = inputName;
+            input = inputValue;
             whileStatus = true;
         }
         else
@@ -35,26 +36,7 @@ static string EnterEmployeeName()
             MsgValueCantBeNull();
         }
     }
-    return name;
-}
-static string EnterEmployeeSurname()
-{
-    bool whileStatus = false;
-    string surname = null;
-    while (!whileStatus)
-    {
-        var inputSurname = GetValueFromConsole("Teraz podaj nazwisko pracownika: ");
-        if (!string.IsNullOrEmpty(inputSurname))
-        {
-            surname = inputSurname;
-            whileStatus = true;
-        }
-        else
-        {
-            MsgValueCantBeNull();
-        }
-    }
-    return surname;
+    return input;
 }
 static int EnterEmployeeAge()
 {
