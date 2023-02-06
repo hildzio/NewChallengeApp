@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 var employeeInputName = EnterEmployeeData("name", "Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
-var employeeInputSurname = EnterEmployeeData("surname", "Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
+var employeeInputSurname = EnterEmployeeData("surname", "Podaj nazwisko pracownika: ");
 var employeeInputAge = EnterEmployeeAge();
 Employee employee = new(employeeInputName, employeeInputSurname, employeeInputAge);
 try
