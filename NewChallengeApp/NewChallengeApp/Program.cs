@@ -6,18 +6,8 @@ var employeeInputName = EnterEmployeeData("name", "Wtiaj! Jest to aplikacja słu
 var employeeInputSurname = EnterEmployeeData("surname", "Podaj nazwisko pracownika: ");
 var employeeInputAge = EnterEmployeeAge();
 Employee employee = new(employeeInputName, employeeInputSurname, employeeInputAge);
-try
-{
-    AddGradesToEmpoloyee(employee);
-}
-catch (Exception e)
-{
-    Console.WriteLine($"Exception catched {e.Message}");
-}
-finally
-{
-    PrintStatistics(employee);
-}
+AddGradesToEmpoloyee(employee);
+PrintStatistics(employee);
 
 static string EnterEmployeeData(string input, string message)
 {
@@ -80,7 +70,14 @@ void AddGradesToEmpoloyee(Employee employee)
         {
             break;
         }
-        employee.AddGrade(input!);
+        try
+        {
+            employee.AddGrade(input!);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception catched {e.Message}");
+        }
     }
 }
 void PrintStatistics(Employee employee)
