@@ -46,7 +46,6 @@ static int EnterEmployeeAge(string message)
         }
         else
         {
-            MsgValueCantBeNull();
             Console.WriteLine("Wprowadź poprawną wartość wieku w latach.");
         }
     }
@@ -68,7 +67,6 @@ static char EnterEmployeeSex(string message)
         }
         else
         {
-            MsgValueCantBeNull();
             Console.WriteLine("Wprowadź poprawną wartość płci : K lub M");
         }
     }
@@ -130,10 +128,10 @@ void PrintStatistics(Employee employee)
 {
     var sexName = ConvertSexLetterForSexName(employeeInputSex);
     Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge}, płeć {sexName} są dostępne poniższe dane:");
-        var statistics = employee.GetStatistics();
-        Console.WriteLine($"Grades list: {statistics.GradesList.TrimStart(',')}\n" +
-                          $"Average: {statistics.Average:N2}\n" +
-                          $"Max: {statistics.Max}\n" +
-                          $"Min: {statistics.Min} \n" +
-                          $"Letter: {statistics.AverageLetter} \n");
+    var statistics = employee.GetStatistics();
+    Console.WriteLine($"Grades list: {statistics.GradesList.TrimStart(',')}\n" +
+                      $"Average: {statistics.Average:N2}\n" +
+                      $"Max: {statistics.Max}\n" +
+                      $"Min: {statistics.Min} \n" +
+                      $"Letter: {statistics.AverageLetter} \n");
 }

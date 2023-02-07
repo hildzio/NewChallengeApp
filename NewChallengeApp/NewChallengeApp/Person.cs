@@ -19,6 +19,6 @@ namespace NewChallengeApp
         public string Surname { get; private set; }
         public int Age { get; private set; }
         public char Sex { get; private set; }
-       
+
     }
 }

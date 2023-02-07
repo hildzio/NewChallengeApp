@@ -64,7 +64,6 @@ namespace NewChallengeApp
                     break;
                 default:
                     throw new Exception("Wrong Letter");
-                    break;
             }
         }
         public Statistics GetStatistics()
