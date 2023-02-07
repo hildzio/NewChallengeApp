@@ -1,11 +1,13 @@
 ﻿using NewChallengeApp;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 var employeeInputName = EnterEmployeeData("name", "Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
 var employeeInputSurname = EnterEmployeeData("surname", "Podaj nazwisko pracownika: ");
-var employeeInputAge = EnterEmployeeAge();
-Employee employee = new(employeeInputName, employeeInputSurname, employeeInputAge);
+var employeeInputAge = EnterEmployeeAge("Teraz podaj wiek pracownika: ");
+var employeeInputSex = EnterEmployeeSex("Teraz podaj płeć pracownika (K - kobieta, M - mężczyzna) : ");
+Employee employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
 AddGradesToEmpoloyee(employee);
 PrintStatistics(employee);
 
@@ -28,13 +30,13 @@ static string EnterEmployeeData(string input, string message)
     }
     return input;
 }
-static int EnterEmployeeAge()
+static int EnterEmployeeAge(string message)
 {
     bool whileStatus = false;
     int age = 0;
     while (!whileStatus)
     {
-        var inputAge = GetValueFromConsole("Teraz podaj wiek pracownika: ");
+        var inputAge = GetValueFromConsole(message);
         var succes = int.TryParse(inputAge, out int parsedAge);
 
         if (succes == true && parsedAge > 0)
@@ -49,6 +51,42 @@ static int EnterEmployeeAge()
         }
     }
     return age;
+}
+static char EnterEmployeeSex(string message)
+{
+    bool whileStatus = false;
+    char sexLetter = '0';
+    while (!whileStatus)
+    {
+        var inputSex = GetValueFromConsole(message);
+        var succes = char.TryParse(inputSex, out char parsedSex);
+
+        if (succes == true && parsedSex == 'M' || parsedSex == 'm' || parsedSex == 'K' || parsedSex == 'k')
+        {
+            sexLetter = char.ToUpper(parsedSex);
+            whileStatus = true;
+        }
+        else
+        {
+            MsgValueCantBeNull();
+            Console.WriteLine("Wprowadź poprawną wartość płci : K lub M");
+        }
+    }
+    return sexLetter;
+}
+static string ConvertSexLetterForSexName(char sexLetter)
+{
+    string sexName = null;
+    switch (sexLetter)
+    {
+        case 'M':
+            sexName = "Mężczyzna";
+            break;
+        case 'K':
+            sexName = "Kobieta";
+            break;
+    }
+    return sexName!;
 }
 static void MsgValueCantBeNull()
 {
@@ -90,11 +128,12 @@ void AddGradesToEmpoloyee(Employee employee)
 }
 void PrintStatistics(Employee employee)
 {
-    Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge} są dostępne poniższe dane:");
-    var statistics = employee.GetStatistics();   
-    Console.WriteLine($"Grades list: {statistics.GradesList.TrimStart(',')}\n" +
-                      $"Average: {statistics.Average:N2}\n" +
-                      $"Max: {statistics.Max}\n" +
-                      $"Min: {statistics.Min} \n" +
-                      $"Letter: {statistics.AverageLetter} \n");
+    var sexName = ConvertSexLetterForSexName(employeeInputSex);
+    Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge}, płeć {sexName} są dostępne poniższe dane:");
+        var statistics = employee.GetStatistics();
+        Console.WriteLine($"Grades list: {statistics.GradesList.TrimStart(',')}\n" +
+                          $"Average: {statistics.Average:N2}\n" +
+                          $"Max: {statistics.Max}\n" +
+                          $"Min: {statistics.Min} \n" +
+                          $"Letter: {statistics.AverageLetter} \n");
 }

@@ -4,17 +4,12 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace NewChallengeApp
 {
-    public class Employee
+    public class Employee : Person
     {
         private List<float> grades = new();
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-        public int Age { get; private set; }
-        public Employee(string name, string surname, int age)
+
+        public Employee(string name, string surname, int age, char sex) : base(name, surname, age, sex)
         {
-            this.Name = name;
-            this.Surname = surname;
-            this.Age = age;
         }
         public void AddGrade(float grade)
         {
@@ -35,7 +30,7 @@ namespace NewChallengeApp
             }
             else
             {
-               throw new Exception("String is not float.");
+                throw new Exception("String is not float.");
             }
         }
         public void AddGrade(int gradeInInt)

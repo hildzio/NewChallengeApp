@@ -6,7 +6,7 @@
         public void CheckMinMaxAverageMethod_ShouldReturnCorrectResult()
         {
             //arrange
-            var employee = new Employee("Jan", "haslo123", 35);
+            var employee = new Employee("Jan", "haslo123", 35, 'M');
             employee.AddGrade(1);
             employee.AddGrade(6);
             employee.AddGrade(9);
@@ -23,7 +23,7 @@
         public void CheckAddGradeWithStringAndAverageLetter_ShouldReturnCorrectResult()
         {
             //arrange
-            var employee = new Employee("Jan", "haslo123", 35);
+            var employee = new Employee("Jan", "haslo123", 35, 'M');
             employee.AddGrade("40");
             employee.AddGrade("42");
             //act
@@ -36,7 +36,7 @@
         public void CheckAddGradeWithIntAndAverageLetter_ShouldReturnCorrectResult()
         {
             //arrange
-            var employee = new Employee("Jan", "haslo123", 35);
+            var employee = new Employee("Jan", "haslo123", 35, 'M');
             employee.AddGrade(20);
             employee.AddGrade(80);
             //act
@@ -49,7 +49,7 @@
         public void CheckAddGradeWithCharAndAverageLetter_ShouldReturnCorrectResult()
         {
             //arrange
-            var employee = new Employee("Jan", "haslo123", 35);
+            var employee = new Employee("Jan", "haslo123", 35, 'M');
             employee.AddGrade('a');
             employee.AddGrade('B');
             //act
