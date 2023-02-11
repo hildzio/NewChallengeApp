@@ -3,7 +3,7 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-var employeeInputName = EnterEmployeeData("name", "Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n Podaj imię pracownika: ");
+var employeeInputName = EnterEmployeeData("name", "Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n\n Podaj imię pracownika: ");
 var employeeInputSurname = EnterEmployeeData("surname", "Podaj nazwisko pracownika: ");
 var employeeInputAge = EnterEmployeeAge("Teraz podaj wiek pracownika: ");
 var employeeInputSex = EnterEmployeeSex("Teraz podaj płeć pracownika (K - kobieta, M - mężczyzna) : ");

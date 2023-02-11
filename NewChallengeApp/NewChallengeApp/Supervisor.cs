@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace NewChallengeApp
 {
-    public class Employee : Person, IEmployee
+    public class Supervisor : Person, IEmployee
     {
         private List<float> grades = new();
-
-        public Employee(string name, string surname, int age, char sex) : base(name, surname, age, sex)
+        public Supervisor(string name, string surname, int age, char sex) : base(name, surname, age, sex)
         {
         }
         public void AddGrade(float grade)
@@ -24,13 +26,80 @@ namespace NewChallengeApp
         }
         public void AddGrade(string gradeInString)
         {
-            if (float.TryParse(gradeInString, out float result))
+            if (gradeInString.Length == 1 && char.IsDigit(gradeInString[0]))
             {
-                this.AddGrade(result);
+                ConvertGrade(gradeInString);
+            }
+            else if (gradeInString.Length == 2 && (char.IsDigit(gradeInString[0]) && (gradeInString[1] == '-' || gradeInString[1] == '+')) ||
+                                                  (char.IsDigit(gradeInString[1]) && (gradeInString[0] == '-' || gradeInString[0] == '+')))
+            {
+                ConvertGrade(gradeInString);
             }
             else
             {
-                throw new Exception("String is not float.");
+                throw new Exception("String is not float representation.");
+            }
+        }
+        public void ConvertGrade(string grade)
+        {
+            switch (grade)
+            {
+                case "6":
+                    this.grades.Add(100);
+                    break;
+                case "6-":
+                case "-6":
+                    this.grades.Add(95);
+                    break;
+                case "5+":
+                case "+5":
+                    this.grades.Add(85);
+                    break;
+                case "5":
+                    this.grades.Add(80);
+                    break;
+                case "5-":
+                case "-5":
+                    this.grades.Add(75);
+                    break;
+                case "4+":
+                case "+4":
+                    this.grades.Add(65);
+                    break;
+                case "4":
+                    this.grades.Add(60);
+                    break;
+                case "4-":
+                case "-4":
+                    this.grades.Add(55);
+                    break;
+                case "3+":
+                case "+3":
+                    this.grades.Add(45);
+                    break;
+                case "3":
+                    this.grades.Add(40);
+                    break;
+                case "3-":
+                case "-3":
+                    this.grades.Add(35);
+                    break;
+                case "2+":
+                case "+2":
+                    this.grades.Add(25);
+                    break;
+                case "2":
+                    this.grades.Add(20);
+                    break;
+                case "2-":
+                case "-2":
+                    this.grades.Add(15);
+                    break;
+                case "1":
+                    this.grades.Add(0);
+                    break;
+                default:
+                    throw new Exception("Wrong Grade");
             }
         }
         public void AddGrade(int gradeInInt)
@@ -38,6 +107,7 @@ namespace NewChallengeApp
             var grade = (float)gradeInInt;
             this.grades.Add(grade);
         }
+
         public void AddGrade(char grade)
         {
             switch (grade)
@@ -66,6 +136,7 @@ namespace NewChallengeApp
                     throw new Exception("Wrong Letter");
             }
         }
+
         public Statistics GetStatistics()
         {
             var statistics = new Statistics();
