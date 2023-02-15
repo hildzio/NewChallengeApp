@@ -1,17 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
-
-namespace NewChallengeApp
+﻿namespace NewChallengeApp
 {
-    public class Employee : Person, IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
-        private List<float> grades = new();
-
-        public Employee(string name, string surname, int age, char sex) : base(name, surname, age, sex)
+        public EmployeeInMemory(string name, string surname, int age, char sex)
+            : base(name, surname, age, sex)
         {
         }
-        public void AddGrade(float grade)
+        private List<float> grades = new();
+        public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
@@ -22,12 +18,12 @@ namespace NewChallengeApp
                 throw new Exception("Invalid grade. Type value between 0 and 100.");
             }
         }
-        public void AddGrade(double gradeInDouble)
+        public override void AddGrade(double gradeInDouble)
         {
             var grade = (float)gradeInDouble;
-            this.grades.Add(grade);
+            AddGrade(grade);
         }
-            public void AddGrade(string gradeInString)
+        public override void AddGrade(string gradeInString)
         {
             if (float.TryParse(gradeInString, out float result))
             {
@@ -38,12 +34,12 @@ namespace NewChallengeApp
                 throw new Exception("String is not float.");
             }
         }
-        public void AddGrade(int gradeInInt)
+        public override void AddGrade(int gradeInInt)
         {
             var grade = (float)gradeInInt;
-            this.grades.Add(grade);
+            AddGrade(grade);
         }
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
             switch (grade)
             {
@@ -71,7 +67,7 @@ namespace NewChallengeApp
                     throw new Exception("Wrong Letter");
             }
         }
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
             statistics.Average = 0;

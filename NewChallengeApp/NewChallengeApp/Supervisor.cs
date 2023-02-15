@@ -24,14 +24,19 @@ namespace NewChallengeApp
                 throw new Exception("Invalid grade. Type value between 0 and 100.");
             }
         }
+        public void AddGrade(double gradeInDouble)
+        {
+            var grade = (float)gradeInDouble;
+            AddGrade(grade);
+        }
         public void AddGrade(string gradeInString)
         {
             if (gradeInString.Length == 1 && char.IsDigit(gradeInString[0]))
             {
                 ConvertGrade(gradeInString);
             }
-            else if (gradeInString.Length == 2 && (char.IsDigit(gradeInString[0]) && (gradeInString[1] == '-' || gradeInString[1] == '+')) ||
-                                                  (char.IsDigit(gradeInString[1]) && (gradeInString[0] == '-' || gradeInString[0] == '+')))
+            else if (gradeInString.Length == 2 && ((char.IsDigit(gradeInString[0]) && (gradeInString[1] == '-' || gradeInString[1] == '+')) ||
+                                                  (char.IsDigit(gradeInString[1]) && (gradeInString[0] == '-' || gradeInString[0] == '+'))))
             {
                 ConvertGrade(gradeInString);
             }
@@ -107,7 +112,6 @@ namespace NewChallengeApp
             var grade = (float)gradeInInt;
             this.grades.Add(grade);
         }
-
         public void AddGrade(char grade)
         {
             switch (grade)
@@ -136,7 +140,6 @@ namespace NewChallengeApp
                     throw new Exception("Wrong Letter");
             }
         }
-
         public Statistics GetStatistics()
         {
             var statistics = new Statistics();

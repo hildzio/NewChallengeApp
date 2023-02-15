@@ -6,11 +6,20 @@ using System.Xml.Linq;
 var employeeInputName = EnterEmployeeData("name", "Wtiaj! Jest to aplikacja służąca do oceny pracowników. \n\n Podaj imię pracownika: ");
 var employeeInputSurname = EnterEmployeeData("surname", "Podaj nazwisko pracownika: ");
 var employeeInputAge = EnterEmployeeAge("Teraz podaj wiek pracownika: ");
-var employeeInputSex = EnterEmployeeSex("Teraz podaj płeć pracownika (K - kobieta, M - mężczyzna) : ");
-Employee employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
-AddGradesToEmpoloyee(employee);
-PrintStatistics(employee);
-
+var employeeInputSex = EnterEmployeeSex("Teraz podaj płeć pracownika (k - kobieta, m - mężczyzna) : ");
+var menuInputLetter = FileOrMemoryMenu("Na jakim rodzaju pamięci chcesz operować ? m  - memory (zapis danych do pamięci), f - file (zapis danych do pliku) : ");
+if (!string.IsNullOrEmpty(menuInputLetter) && menuInputLetter == "m")
+{
+    EmployeeInMemory employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
+    AddGradesToEmpoloyeeInMemory(employee);
+    PrintStatisticsInMemory(employee);
+}
+else if (!string.IsNullOrEmpty(menuInputLetter) && menuInputLetter == "f")
+{
+    EmployeeInFile employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
+    AddGradesToEmpoloyeeInFile(employee);
+    PrintStatisticsInFile(employee);
+}
 static string EnterEmployeeData(string input, string message)
 {
     bool whileStatus = false;
@@ -62,25 +71,44 @@ static char EnterEmployeeSex(string message)
 
         if (succes == true && parsedSex == 'M' || parsedSex == 'm' || parsedSex == 'K' || parsedSex == 'k')
         {
-            sexLetter = char.ToUpper(parsedSex);
+            sexLetter = char.ToLower(parsedSex);
             whileStatus = true;
         }
         else
         {
-            Console.WriteLine("Wprowadź poprawną wartość płci : K lub M");
+            Console.WriteLine("Wprowadź poprawną wartość płci : k lub m");
         }
     }
     return sexLetter;
+}
+static string FileOrMemoryMenu(string message)
+{
+    var inputMenu = GetValueFromConsole(message);
+    bool whileStatus = false;
+    var resultMenu = "";
+    while (!whileStatus)
+    {
+        if (inputMenu == "M" || inputMenu == "m" || inputMenu == "F" || inputMenu == "f")
+        {
+            resultMenu = inputMenu.ToLower();
+            whileStatus = true;
+        }
+        else
+        {
+            Console.WriteLine("Wprowadź poprawną wartość menu : f lub m");
+        }
+    }
+    return resultMenu;
 }
 static string ConvertSexLetterForSexName(char sexLetter)
 {
     string sexName = null;
     switch (sexLetter)
     {
-        case 'M':
+        case 'm':
             sexName = "Mężczyzna";
             break;
-        case 'K':
+        case 'k':
             sexName = "Kobieta";
             break;
     }
@@ -96,7 +124,7 @@ static string GetValueFromConsole(string inputMessage)
     var inputFromUser = Console.ReadLine();
     return inputFromUser;
 }
-void AddGradesToEmpoloyee(Employee employee)
+void AddGradesToEmpoloyeeInMemory(EmployeeInMemory employee)
 {
     while (true)
     {
@@ -124,7 +152,46 @@ void AddGradesToEmpoloyee(Employee employee)
         }
     }
 }
-void PrintStatistics(Employee employee)
+void AddGradesToEmpoloyeeInFile(EmployeeInFile employee)
+{
+    while (true)
+    {
+        Console.WriteLine($"Podaj kolejną ocenę dla pracowanika {employee.Name} {employee.Surname} lub wciśnij q aby wyjść : ");
+        var input = Console.ReadLine();
+        if (input == "q")
+        {
+            break;
+        }
+        try
+        {
+            if (input == "A" || input == "a" || input == "B" || input == "b" || input == "C" || input == "c" || input == "D" || input == "d" || input == "E" || input == "e")
+            {
+                var inputChar = char.Parse(input);
+                employee.AddGrade(inputChar);
+            }
+            else
+            {
+                employee.AddGrade(input!);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception catched {e.Message}");
+        }
+    }
+}
+void PrintStatisticsInMemory(EmployeeInMemory employee)
+{
+    var sexName = ConvertSexLetterForSexName(employeeInputSex);
+    Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge}, płeć {sexName} są dostępne poniższe dane:");
+    var statistics = employee.GetStatistics();
+    Console.WriteLine($"Grades list: {statistics.GradesList.TrimStart(',')}\n" +
+                      $"Average: {statistics.Average:N2}\n" +
+                      $"Max: {statistics.Max}\n" +
+                      $"Min: {statistics.Min} \n" +
+                      $"Letter: {statistics.AverageLetter} \n");
+}
+void PrintStatisticsInFile(EmployeeInFile employee)
 {
     var sexName = ConvertSexLetterForSexName(employeeInputSex);
     Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge}, płeć {sexName} są dostępne poniższe dane:");
