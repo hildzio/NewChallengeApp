@@ -27,7 +27,7 @@ namespace NewChallengeApp
             var grade = (float)gradeInDouble;
             this.grades.Add(grade);
         }
-            public void AddGrade(string gradeInString)
+        public void AddGrade(string gradeInString)
         {
             if (float.TryParse(gradeInString, out float result))
             {

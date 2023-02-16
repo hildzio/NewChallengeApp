@@ -8,18 +8,20 @@ var employeeInputSurname = EnterEmployeeData("surname", "Podaj nazwisko pracowni
 var employeeInputAge = EnterEmployeeAge("Teraz podaj wiek pracownika: ");
 var employeeInputSex = EnterEmployeeSex("Teraz podaj płeć pracownika (k - kobieta, m - mężczyzna) : ");
 var menuInputLetter = FileOrMemoryMenu("Na jakim rodzaju pamięci chcesz operować ? m  - memory (zapis danych do pamięci), f - file (zapis danych do pliku) : ");
+
 if (!string.IsNullOrEmpty(menuInputLetter) && menuInputLetter == "m")
 {
     EmployeeInMemory employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
-    AddGradesToEmpoloyeeInMemory(employee);
+    AddGradesToEmpoloyee(employee);
     PrintStatistics(employee);
 }
 else if (!string.IsNullOrEmpty(menuInputLetter) && menuInputLetter == "f")
 {
     EmployeeInFile employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
-    AddGradesToEmpoloyeeInFile(employee);
+    AddGradesToEmpoloyee(employee);
     PrintStatistics(employee);
 }
+
 static string EnterEmployeeData(string input, string message)
 {
     bool whileStatus = false;
@@ -124,35 +126,7 @@ static string GetValueFromConsole(string inputMessage)
     var inputFromUser = Console.ReadLine();
     return inputFromUser;
 }
-void AddGradesToEmpoloyeeInMemory(EmployeeInMemory employee)
-{
-    while (true)
-    {
-        Console.WriteLine($"Podaj kolejną ocenę dla pracowanika {employee.Name} {employee.Surname} lub wciśnij q aby wyjść : ");
-        var input = Console.ReadLine();
-        if (input == "q")
-        {
-            break;
-        }
-        try
-        {
-            if (input == "A" || input == "a" || input == "B" || input == "b" || input == "C" || input == "c" || input == "D" || input == "d" || input == "E" || input == "e")
-            {
-                var inputChar = char.Parse(input);
-                employee.AddGrade(inputChar);
-            }
-            else
-            {
-                employee.AddGrade(input!);
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Exception catched {e.Message}");
-        }
-    }
-}
-void AddGradesToEmpoloyeeInFile(EmployeeInFile employee)
+void AddGradesToEmpoloyee(IEmployee employee)
 {
     while (true)
     {
