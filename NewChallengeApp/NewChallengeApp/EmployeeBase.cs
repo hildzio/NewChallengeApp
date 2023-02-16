@@ -19,5 +19,5 @@
         public abstract void AddGrade(int gradeInInt);
         public abstract void AddGrade(char grade);
         public abstract Statistics GetStatistics();
-     }
+    }
 }

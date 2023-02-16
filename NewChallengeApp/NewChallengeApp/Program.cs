@@ -12,13 +12,13 @@ if (!string.IsNullOrEmpty(menuInputLetter) && menuInputLetter == "m")
 {
     EmployeeInMemory employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
     AddGradesToEmpoloyeeInMemory(employee);
-    PrintStatisticsInMemory(employee);
+    PrintStatistics(employee);
 }
 else if (!string.IsNullOrEmpty(menuInputLetter) && menuInputLetter == "f")
 {
     EmployeeInFile employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
     AddGradesToEmpoloyeeInFile(employee);
-    PrintStatisticsInFile(employee);
+    PrintStatistics(employee);
 }
 static string EnterEmployeeData(string input, string message)
 {
@@ -180,18 +180,7 @@ void AddGradesToEmpoloyeeInFile(EmployeeInFile employee)
         }
     }
 }
-void PrintStatisticsInMemory(EmployeeInMemory employee)
-{
-    var sexName = ConvertSexLetterForSexName(employeeInputSex);
-    Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge}, płeć {sexName} są dostępne poniższe dane:");
-    var statistics = employee.GetStatistics();
-    Console.WriteLine($"Grades list: {statistics.GradesList.TrimStart(',')}\n" +
-                      $"Average: {statistics.Average:N2}\n" +
-                      $"Max: {statistics.Max}\n" +
-                      $"Min: {statistics.Min} \n" +
-                      $"Letter: {statistics.AverageLetter} \n");
-}
-void PrintStatisticsInFile(EmployeeInFile employee)
+void PrintStatistics(IEmployee employee)
 {
     var sexName = ConvertSexLetterForSexName(employeeInputSex);
     Console.WriteLine($"Dla pracownika {employeeInputName} {employeeInputSurname}, lat {employeeInputAge}, płeć {sexName} są dostępne poniższe dane:");
