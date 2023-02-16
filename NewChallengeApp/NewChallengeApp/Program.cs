@@ -12,16 +12,22 @@ var menuInputLetter = FileOrMemoryMenu("Na jakim rodzaju pamięci chcesz operowa
 if (!string.IsNullOrEmpty(menuInputLetter) && menuInputLetter == "m")
 {
     EmployeeInMemory employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
+    employee.GradeAdded += EmployeeGradeAdded;
     AddGradesToEmpoloyee(employee);
     PrintStatistics(employee);
 }
 else if (!string.IsNullOrEmpty(menuInputLetter) && menuInputLetter == "f")
 {
     EmployeeInFile employee = new(employeeInputName, employeeInputSurname, employeeInputAge, employeeInputSex);
+    employee.GradeAdded += EmployeeGradeAdded;
     AddGradesToEmpoloyee(employee);
     PrintStatistics(employee);
 }
 
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano nową ocenę.");
+}
 static string EnterEmployeeData(string input, string message)
 {
     bool whileStatus = false;
@@ -104,7 +110,7 @@ static string FileOrMemoryMenu(string message)
 }
 static string ConvertSexLetterForSexName(char sexLetter)
 {
-    string sexName = null;
+    string sexName = string.Empty;
     switch (sexLetter)
     {
         case 'm':
@@ -142,6 +148,7 @@ void AddGradesToEmpoloyee(IEmployee employee)
             {
                 var inputChar = char.Parse(input);
                 employee.AddGrade(inputChar);
+
             }
             else
             {

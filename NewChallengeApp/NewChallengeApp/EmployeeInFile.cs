@@ -12,6 +12,8 @@ namespace NewChallengeApp
         {
             fullFileName = $"{name}_{surname}_{fileName}";
         }
+        public override event GradeAddedDelegate GradeAdded;
+
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
@@ -19,6 +21,11 @@ namespace NewChallengeApp
                 using (var writer = File.AppendText($"{fullFileName}"))
                 {
                     writer.WriteLine(grade);
+                    this.grades.Add(grade);
+                    if (GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
                 }
             }
             else
