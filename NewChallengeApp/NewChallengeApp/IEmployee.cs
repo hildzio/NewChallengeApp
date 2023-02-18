@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using static NewChallengeApp.EmployeeBase;
 
 namespace NewChallengeApp
 {
@@ -17,6 +13,7 @@ namespace NewChallengeApp
         void AddGrade(string gradeInString);
         void AddGrade(int gradeInInt);
         void AddGrade(char grade);
+        event GradeAddedDelegate GradeAdded;
         Statistics GetStatistics();
     }
 }
